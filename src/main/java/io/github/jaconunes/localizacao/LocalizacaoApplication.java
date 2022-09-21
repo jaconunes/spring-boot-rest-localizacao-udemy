@@ -2,6 +2,7 @@ package io.github.jaconunes.localizacao;
 
 import io.github.jaconunes.localizacao.domain.entity.Cidade;
 import io.github.jaconunes.localizacao.domain.repository.CidadeRepository;
+import io.github.jaconunes.localizacao.service.CidadeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -12,30 +13,15 @@ import org.springframework.transaction.annotation.Transactional;
 public class LocalizacaoApplication implements CommandLineRunner {
 
 	@Autowired
-	private CidadeRepository cidadeRepository;
+	private CidadeService cidadeService;
 
 	@Override
 	public void run(String... args) throws Exception {
-		listarCidadesPorQuantidadeHabitantes();
+		cidadeService.listarCidadesPorQuantidadeHabitantes();
 
 	}
 
-	void listarCidadesPorQuantidadeHabitantes(){
-		cidadeRepository.findByHabitantesGreaterThan(1000001L).forEach(System.out::println);
-	}
 
-	void listarCidadesPorNome(){
-		cidadeRepository.findByNomeContaining("a").forEach(System.out::println);
-	}
-
-	void listarCidadesPorHabitantes(){
-		cidadeRepository.findByHabitantes(78787900L).forEach(System.out::println);
-	}
-
-
-	void listarCidades(){
-		cidadeRepository.findAll().forEach(System.out::println);
-	}
 
 	public static void main(String[] args) {
 		SpringApplication.run(LocalizacaoApplication.class, args);

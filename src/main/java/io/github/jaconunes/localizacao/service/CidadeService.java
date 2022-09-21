@@ -1,6 +1,8 @@
 package io.github.jaconunes.localizacao.service;
 
+import io.github.jaconunes.localizacao.domain.entity.Cidade;
 import io.github.jaconunes.localizacao.domain.repository.CidadeRepository;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -27,6 +29,11 @@ public class CidadeService {
 
     public void listarCidades(){
         cidadeRepository.findAll().forEach(System.out::println);
+    }
+
+    void listarCidadesSpecsFiltroDinamico(Cidade filtro){
+        Specification<Cidade> specs = Specification.where((root, query, criteriaBuilder) -> criteriaBuilder.conjunction());
+
     }
 
 }
